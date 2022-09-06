@@ -1,0 +1,4 @@
+region,mu,pop,I_eq_index,I_eq_index_HH,I_eq_neither,pcr_pos_index_HH,pcr_pos_neighbour,rdt_sensitivity,cases_per_day,followup_3_days,followup_6_days,followup_15_days,followup_21_days,nu_HH,nu_n
+Pemba,0.005,406848,0.0331,0.0184,0.01364,0.043,0.01,0.34,1.6,0.35,0.479,0.599,0.62,7.02,20.37
+Unguja,0.005,896721,0.04615,0.02683,0.01175,0.118,0.015,0.34,6.4,0.35,0.479,0.599,0.62,6.27,18.23
+Mainland,0.005,43625354,0.0779,0.0779,0.0779,0.0779,0.0779,0,0,0,0,0,0,1,1
