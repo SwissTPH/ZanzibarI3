@@ -32,8 +32,7 @@ interventions_tb = np.zeros(shape=(tot_length,6)) #change to 6 when including be
 number = 0
 for combination in product(follow_up, neighbours, treatment_seeking,\
                           rfmda, imp_treat, beta):
-#for combination in product(follow_up, neighbours, treatment_seeking,\
-#                           rfmda, imp_treat):
+
     interventions_tb[number,:] = combination
     number += 1
 
@@ -50,8 +49,8 @@ int_df = int_df.loc[(int_df['followup'] != 0.0) | \
                               (int_df['neighbours'] != 20)]
 int_df = int_df.loc[(int_df['followup'] != 0.0) | \
                               (int_df['neighbours'] != 100)]
-int_df = int_df.iloc[np.repeat(np.arange(len(int_df)), 2)] #uncomment when not doing param runs
+int_df = int_df.iloc[np.repeat(np.arange(len(int_df)), 2)] #uncomment when not doing parameter uncertainty runs
 
 
-os.chdir('C:/Users/aatrda/Documents/GitLab/importation/cluster/i3_project/')
+os.chdir('~/interventions/')
 int_df.to_csv('interventions.csv', index=False)
