@@ -1,0 +1,3 @@
+region,N,Positive,pcr_pos_index_HH_t,pcr_pos_index_HH_b,pcr_pos_neighbours_t,pcr_pos_neighbours_b,nu_index_HH_mean,nu_index_HH_se,nu_neighbour_mean,nu_neighbour_se
+Pemba,2272,31,19,445,12,1158,7.021978022,0.239268618,20.36813187,0.504196919
+Unguja,3233,38,63,532,25,1643,6.273127753,0.216519172,18.23348018,0.501967311
