@@ -7,11 +7,14 @@ This malaria model is free software; you can redistribute it and/or modify it un
 This model is built for studying imported, introduced and indigenous cases in settings approaching malaria elimination. It includes parameters for studying reactive case detection, treatment or infection prevention in travellers, and general reductions in transmission rates.
 
 ### Data
-A summary of RADZEC data used to run the model can be found here. Additionally, parameter values drawn from distributions corresponding to the uncertainty in the data is included as well, for conducting the uncertainty analysis.
+* 'RADZEC_data.csv': point value estimates of relevant parameter values for running the model
+* 'distributions.csv': RADZEC data values used to parameterise distributions for the uncertainty analysis
+* 'make_param_sets.py': sample from the distributions representing the uncertainty in the RADZEC data for the uncertainty analysis
+* 'param_100.csv': parameter values drawn and used to conduct the uncertainty analysis
 
 ### Interventions
 Parameter values for the various intervention scenarios can be found here.
-A script for making the intervention tables is also included.
+A script for making the intervention tables is also included ('make_interventions.py').
 
 ### Code
 All code to run the model in Python can be found in the 'code' folder. Separate files are provided for different interventions and analyses.
