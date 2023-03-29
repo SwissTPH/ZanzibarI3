@@ -48,6 +48,13 @@ df.betared <- df.betared[df.betared$betared %in% beta_red & df.betared$imptreat 
                            df.betared$time %in% time_int,]
 df.betared$time <- df.betared$time - 7
 
+prop_zero_1SD <- sqrt(df.betared$prop_zero*(1-df.betared$prop_zero)/500)
+df.betared$lower_prop_zero <- df.betared$prop_zero-1.96*prop_zero_1SD
+df.betared$upper_prop_zero <- df.betared$prop_zero+1.96*prop_zero_1SD
+df.betared$lower_prop_zero <- replace(df.betared$lower_prop_zero, df.betared$lower_prop_zero<0, 0)
+df.betared$upper_prop_zero <- replace(df.betared$upper_prop_zero, df.betared$upper_prop_zero>1, 1)
+
+
 df.betared$imptreat <- replace(df.betared$imptreat, df.betared$imptreat==0.75, "75%" )
 df.betared$imptreat <- replace(df.betared$imptreat, df.betared$imptreat==0.9, "90%" )
 df.betared$imptreat <- replace(df.betared$imptreat, df.betared$imptreat==1.0, "100%" )
@@ -61,7 +68,10 @@ df.betared$betared <- replace(df.betared$betared, df.betared$betared==0.90, "Tra
 
 cbp <- c("#622569", "#5b9aa0", "#b8a9c9", "#d6d4e0","#ee6b6e")
 
-ggplot(df.betared, aes(x=time, y=prop_zero, colour=imptreat)) + geom_line() +
+ggplot(df.betared, aes(x=time, y=prop_zero, colour=imptreat)) + 
+  geom_ribbon(aes(ymin=lower_prop_zero, ymax=upper_prop_zero, fill = imptreat),
+              show.legend=FALSE, alpha=0.6, colour=NA) +
+  geom_line() +
   labs(x="Time (years)", y="Probability of reaching elimination", colour='Proportion of infected travellers treated') +
   theme_minimal() +
   facet_nested(location~betared, nest_line = element_line(linetype = 1)) + panel_border(color = 'grey') +
@@ -108,6 +118,12 @@ time_int <- 7:(total_time-3)
 
 df.mainland <- df.mainland[df.mainland$time %in% time_int,]
 df.mainland$time <- df.mainland$time - 7
+prop_zero_1SD <- sqrt(df.mainland$prop_zero*(1-df.mainland$prop_zero)/500)
+df.mainland$lower_prop_zero <- df.mainland$prop_zero-1.96*prop_zero_1SD
+df.mainland$upper_prop_zero <- df.mainland$prop_zero+1.96*prop_zero_1SD
+df.mainland$lower_prop_zero <- replace(df.mainland$lower_prop_zero, df.mainland$lower_prop_zero<0, 0)
+df.mainland$upper_prop_zero <- replace(df.mainland$upper_prop_zero, df.mainland$upper_prop_zero>1, 1)
+
 
 df.mainland$beta_red_mainland <- replace(df.mainland$beta_red_mainland, df.mainland$beta_red_mainland==0.1, "10%" )
 df.mainland$beta_red_mainland <- replace(df.mainland$beta_red_mainland, df.mainland$beta_red_mainland==0.15, "15%" )
@@ -129,7 +145,10 @@ df.mainland$beta_red_islands <- factor(df.mainland$beta_red_islands, levels=c("T
                                                                               "TR on Zanzibar = 90%"))
 
 
-ggplot(df.mainland, aes(x=time, y=prop_zero, colour=beta_red_mainland)) + geom_line() +
+ggplot(df.mainland, aes(x=time, y=prop_zero, colour=beta_red_mainland)) + 
+  geom_ribbon(aes(ymin=lower_prop_zero, ymax=upper_prop_zero, fill = beta_red_mainland),
+              show.legend=FALSE, alpha=0.6, colour=NA) +
+  geom_line() +
   labs(x="Time (years)", y="Probability of reaching elimination", colour='Transmission reduction\non mainland Tanzania') +
   theme_minimal() + 
   facet_nested(location~beta_red_islands, nest_line = element_line(linetype = 1)) + panel_border(color = 'grey') +
